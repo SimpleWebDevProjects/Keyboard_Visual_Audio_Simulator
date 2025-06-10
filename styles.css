@@ -1,0 +1,353 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #0a0a0f;
+    color: #f0f0ff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(40, 40, 80, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(30, 30, 70, 0.1) 0%, transparent 20%);
+}
+
+/* Header Styles */
+header {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #e0e0ff;
+}
+
+.logo span {
+    color: #6366f1;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    background: rgba(30, 30, 50, 0.3);
+    border: 1px solid rgba(100, 100, 255, 0.2);
+    color: #d0d0ff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(5px);
+}
+
+.btn:hover {
+    background: rgba(60, 60, 100, 0.4);
+    border-color: rgba(120, 120, 255, 0.4);
+}
+
+.btn i {
+    font-size: 1rem;
+}
+
+/* Main Content */
+.container {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    z-index: 20;
+    position: relative;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Visualizer Canvas */
+.visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Shape Styles */
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    mix-blend-mode: screen;
+    animation: float 15s infinite ease-in-out;
+}
+
+.shape.triangle {
+    border-radius: 0;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.shape.square {
+    border-radius: 5px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(20px, -15px) rotate(5deg); }
+    50% { transform: translate(-15px, 10px) rotate(-5deg); }
+    75% { transform: translate(10px, 15px) rotate(3deg); }
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    animation: ripple 1.5s ease-out;
+}
+
+/* Keyboard Styles */
+.keyboard-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 40px;
+    z-index: 50;
+    position: relative;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    padding: 20px;
+    background: rgba(15, 15, 25, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(80, 80, 120, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(25, 25, 45, 0.5);
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #c8c8ff;
+    border: 1px solid rgba(100, 100, 150, 0.3);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.key:hover {
+    background: rgba(40, 40, 80, 0.5);
+    transform: translateY(-2px);
+}
+
+.key.active {
+    background: rgba(80, 80, 180, 0.6);
+    color: #fff;
+    transform: translateY(-3px);
+    border-color: rgba(120, 120, 255, 0.6);
+}
+
+/* Info Panel */
+.info-panel {
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid rgba(80, 80, 120, 0.3);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(100, 100, 150, 0.3);
+}
+
+.info-header h2 {
+    font-size: 1.5rem;
+    color: #e0e0ff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #a0a0c0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.info-content {
+    line-height: 1.7;
+}
+
+.info-content p {
+    margin-bottom: 15px;
+    color: #d0d0ff;
+}
+
+.developer-info {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(100, 100, 150, 0.2);
+}
+
+.developer-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #e0e0ff;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(40, 40, 70, 0.7);
+    border: 1px solid rgba(100, 100, 150, 0.3);
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(60, 60, 100, 0.8);
+}
+
+.social-btn.portfolio {
+    color: #8b5cf6;
+}
+
+.social-btn.linkedin {
+    color: #0a66c2;
+}
+
+.social-btn.instagram {
+    color: #e1306c;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    z-index: 50;
+    position: relative;
+    font-size: 0.9rem;
+    color: #8a8ac4;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .keyboard {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    header {
+        padding: 15px;
+    }
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    .btn span {
+        display: none;
+    }
+    .btn i {
+        font-size: 1.2rem;
+    }
+}
+
+/* Decorative Elements */
+.floating-text {
+    position: absolute;
+    font-size: 12rem;
+    font-weight: 800;
+    color: rgba(40, 40, 80, 0.1);
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+.floating-text.top {
+    top: 10%;
+    left: 5%;
+}
+
+.floating-text.bottom {
+    bottom: 10%;
+    right: 5%;
+    transform: rotate(180deg);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
